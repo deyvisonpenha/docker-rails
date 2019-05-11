@@ -7,3 +7,8 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/
 
 ### II - Ruby on rails Project
 In this step is necessary to create some files as Dockerfile that prepare the image of ruby ​​and other stuff necessary to implement ruby ​​on rails application. So when you clone this repository pay attention on version of ruby, in Docker file, and rails in Gemfile
+
+### TIPS
+To sincronize Redis with Sidekiq using a docker-compose is necessary to have a .env file, and put this code:
+  REDIS_URL=redis://redis:6379/0
+ 
