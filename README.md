@@ -5,7 +5,7 @@ First is necessary to install docker and docker-composer, to do that check the t
 
 https://docs.docker.com/install/linux/docker-ce/ubuntu/
 
-Manage Docker as a non-root user
+*Manage Docker as a non-root user
 1.Create the `docker` group.
 
     $ sudo groupadd docker
@@ -19,6 +19,16 @@ Manage Docker as a non-root user
 4.Verify that you can run `docker` commands without `sudo`.
 
     $ docker run hello-world
+    
+*Install Compose on Linux systems
+
+1.Run this command to download the current stable release of Docker Compose:
+
+    $ sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+2.Apply executable permissions to the binary:
+
+    $ sudo chmod +x /usr/local/bin/docker-compose
 
 ### II - Ruby on rails Project
 In this step is necessary to create some files as Dockerfile that prepare the image of ruby ​​and other stuff necessary to implement ruby ​​on rails application. So when you clone this repository pay attention on version of ruby, in Docker file, and rails in Gemfile
