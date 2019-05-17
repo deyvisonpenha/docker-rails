@@ -42,6 +42,47 @@ After this steps we can running the script bellow that will create yours rails p
 
     $ docker-compose run myapp rails new . --force --no-deps --database=postgresql
 
+When the project is created by Docker the owner of all files is `root` so is necessary to change for yours user, to do that write in terminal console. If you get message error as `Permission Denied` try this comand
+
+    $ sudo chown -R $USER:$USER .
+
+Modify the `database.yml` in `/config/database.yml` to some like that
+
+    default: &default
+    adapter: postgresql
+    encoding: unicode
+    host: db
+    username: postgres
+    password:
+    pool: 5
+
+    development:
+     <<: *default
+    database: myapp_development
+
+
+    test:
+    <<: *default
+    database: myapp_test
+
+And add two gems in yours `Gemfile`
+
+    gem 'redis'
+    gem 'sidekiq'
+    
+
+And install `gem` in the new `Gemfile` which was create with `rails new`
+
+    docker-compose run myapp bundle
+
+quase finalizando, vamos agora rodar o codigo para levantar os serviços 
+
+    docker-compose up
+
+In a new terminal 
+    
+    docker-compose run myapp rails db:create
+
 
 ### TIPS
 To sincronize Redis with Sidekiq using a docker-compose is necessary to have a .env file, and put this code:
