@@ -1,6 +1,6 @@
 # Docker-rails
 This tutorial explain how to implement ruby on rails using docker
-### I - Instalation 
+### I - Instalation and Configuration of your development environment 
 First is necessary to install docker and docker-composer, to do that check the tutorial given by docker site:
 
 https://docs.docker.com/install/linux/docker-ce/ubuntu/
@@ -16,7 +16,7 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/
     
 3.Log out and log back in so that your group membership is re-evaluated.
 
-4.Verify that you can run `docker` commands without `sudo`.
+4.(optional) Verify that you can run `docker` commands without `sudo`.
 
     $ docker run hello-world
     
@@ -31,11 +31,25 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/
     $ sudo chmod +x /usr/local/bin/docker-compose
 
 ### II - Ruby on rails Project
-In this step is necessary to create some files as Dockerfile that prepare the image of ruby ​​and other stuff necessary to implement ruby ​​on rails application. So when you clone this repository pay attention on version of ruby, in Docker file, and rails in Gemfile
+In this step is necessary to create some files as Dockerfile that prepare the image of ruby ​​and other stuff necessary to implement ruby ​​on rails application. So when you clone this repository pay attention on version of ruby, in Docker file, and rails in Gemfile. Don't forget to create the `.env` file that have something like that
 
-https://onebitcode.com/dominando-o-uso-de-jobs-no-rails/
+    REDIS_URL=redis://redis:6379/0
+    COMPOSE_PROJECT_NAME=my_dockerized_app
+
+Because we're using docker image for Redis is necessary to code in this way but if you have already installed in your computer change it to `'redis://localhost:6379/0'`. COMPOSE_PROJECT_NAME is for personalise the name of images and containers that will be created.
+
+After this steps we can running the script bellow that will create yours rails project. Let's explain what is happen here. `myapp` is the name of Service that have in `docker-compose`, after that is pure Rails code to create projects. 
+
+    $ docker-compose run myapp rails new . --force --no-deps --database=postgresql
+
 
 ### TIPS
 To sincronize Redis with Sidekiq using a docker-compose is necessary to have a .env file, and put this code:
   REDIS_URL=redis://redis:6379/0
  
+ 
+ https://docs.docker.com/install/linux/docker-ce/ubuntu/
+ 
+ https://docs.docker.com/compose/rails/
+ 
+ https://onebitcode.com/dominando-o-uso-de-jobs-no-rails/
